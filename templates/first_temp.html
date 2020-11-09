@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>First Template</title>
+  </head>
+  <body>
+    <h1>This is my first template</h1>
+    <h2>This is my page</h2>
+    {% comment %} <h2>{{ books }}</h2> {% endcomment %}
+
+    {% for book in books %}
+    <h2>{{ book.title }}</h2>
+    <h3>{{ book.description }}</h2>
+    {% endfor%}
+  </body>
+</html>

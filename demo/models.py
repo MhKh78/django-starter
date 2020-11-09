@@ -5,9 +5,12 @@ import enum
 
 
 class BookFields(enum.Enum):
-    TITLE = 'title'
-    DESCRIPTION = 'description'
-    PRICE = 'price'
+    ID = "id"
+    TITLE = "title"
+    DESCRIPTION = "description"
+    PRICE = "price"
+    PUBLISHED = "published"
+    IS_PUBLISHED = "is_published"
 
 
 class Book(models.Model):
@@ -15,13 +18,12 @@ class Book(models.Model):
     #     ('HB', 'Hobbit'),
     #     ('LOTR', 'Lord Of The Rings')
     # )
-    title = models.CharField(
-        max_length=36, blank=False, null=True, unique=True)
+    title = models.CharField(max_length=36, blank=False, null=True, unique=True)
     description = models.TextField(max_length=256, blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=6, default=0)
     published = models.DateField(blank=True, null=True, default=None)
     is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='covers/', blank=True)
+    cover = models.ImageField(upload_to="covers/", blank=True)
     created = models.DateField(auto_now=True)
     modified = models.DateTimeField(auto_now=True)
 

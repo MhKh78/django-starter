@@ -12,12 +12,18 @@ class BookFields(enum.Enum):
     PUBLISHED = "published"
     IS_PUBLISHED = "is_published"
     NUMBER = "number"
+    CHARACTERS = "characters"
 
 
 class BookNumberFields(enum.Enum):
     ID = "id"
     ISBN_10 = "isbn_10"
     ISBN_13 = "isbn_13"
+
+
+class CharacterFields(enum.Enum):
+    NAME = "name"
+    BOOK = "book"
 
 
 class BookNumber(models.Model):
@@ -48,3 +54,8 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Character(models.Model):
+    name = models.CharField(max_length=30)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="characters")

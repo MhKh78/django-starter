@@ -1,5 +1,12 @@
 from rest_framework import serializers
-from .models import Book, BookNumber, BookFields, BookNumberFields
+from .models import (
+    Book,
+    BookNumber,
+    BookFields,
+    Character,
+    CharacterFields,
+    BookNumberFields,
+)
 
 
 class BookNumberSerializer(serializers.ModelSerializer):
@@ -12,8 +19,15 @@ class BookNumberSerializer(serializers.ModelSerializer):
         ]
 
 
+class CharacterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Character
+        fields = [CharacterFields.BOOK.value, CharacterFields.NAME.value]
+
+
 class BookSerializer(serializers.ModelSerializer):
     number = BookNumberSerializer(many=False)
+    characters = CharacterSerializer(many=True)
 
     class Meta:
         model = Book
@@ -25,4 +39,5 @@ class BookSerializer(serializers.ModelSerializer):
             BookFields.PUBLISHED.value,
             BookFields.IS_PUBLISHED.value,
             BookFields.NUMBER.value,
+            BookFields.CHARACTERS.value,
         ]

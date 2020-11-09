@@ -13,6 +13,11 @@ class BookFields(enum.Enum):
     IS_PUBLISHED = "is_published"
 
 
+class BookNumber(models.Model):
+    isbn_10 = models.CharField(max_length=10, blank=True, unique=True)
+    isbn_13 = models.CharField(max_length=13, blank=True, unique=True)
+
+
 class Book(models.Model):
     # BOOKS = (
     #     ('HB', 'Hobbit'),
@@ -26,6 +31,10 @@ class Book(models.Model):
     cover = models.ImageField(upload_to="covers/", blank=True)
     created = models.DateField(auto_now=True)
     modified = models.DateTimeField(auto_now=True)
+
+    number = models.OneToOneField(
+        BookNumber, null=True, blank=True, on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.title

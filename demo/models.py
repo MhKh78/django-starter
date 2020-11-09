@@ -11,11 +11,21 @@ class BookFields(enum.Enum):
     PRICE = "price"
     PUBLISHED = "published"
     IS_PUBLISHED = "is_published"
+    NUMBER = "number"
+
+
+class BookNumberFields(enum.Enum):
+    ID = "id"
+    ISBN_10 = "isbn_10"
+    ISBN_13 = "isbn_13"
 
 
 class BookNumber(models.Model):
     isbn_10 = models.CharField(max_length=10, blank=True, unique=True)
     isbn_13 = models.CharField(max_length=13, blank=True, unique=True)
+
+    def __str__(self):
+        return f"Book Number {self.isbn_10}"
 
 
 class Book(models.Model):
